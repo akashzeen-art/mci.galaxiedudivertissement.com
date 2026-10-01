@@ -1,68 +1,105 @@
 import React, { useState } from 'react';
-import { Play, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Play, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedTitle from './AnimatedTitle';
 
 const B1 = 'https://api.ameora.fun/content/GalaxiWebsite/FASHION-24';
 const B2 = 'https://api.ameora.fun/content/GalaxiWebsite/FASHION-26';
 
 const TITLES_24 = [
-  "10 idées de coiffures plaquées sur un carré mi-long lisse",
-  "4 Tuto Turban Facile À Faire",
-  "Acne Routine",
-  "Anti-Imperfections (Routine & Conseils)",
-  "Cheveux longs (Routine)",
-  "Chignon base traie au milieu [Tuto Coiffure]",
-  "Cocooning de routine",
-  "Comment faire une perruque facile & rapide",
-  "Contouring rapide et pas cher",
-  "Easy Eye Liner pour les nuls",
-  "Éliminez correctement les faux ongles et prenez soin de vos ongles naturels",
-  "Épiler ses sourcils",
-  "Halloween Sugar Skull - Tuto Maquillage",
-  "Hijab simple à réaliser (5 méthodes)",
-  "Je coupe et refais mes cheveux SEUL",
-  "Je me maquille UNIQUEMENT avec la trousse de ma sœur",
-  "Je me tatoue les lèvres (Test du Rouge)",
-  "Jolie compilation de maquillage pour les yeux",
-  "La meilleure astuce pour un eyeliner",
-  "Lápiz Labial Tutorial Compilación",
-  "Le meilleur maquillage cheveux bouclés",
-  "Le meilleur masque - DIY",
-  "Les formes d'ongles sur capsules faux ongles",
-  "Les meilleurs tutoriels de maquillage",
+  "10 idées de coiffures plaquées sur un carré mi-long lisse","4 Tuto Turban Facile À Faire","Acne Routine","Anti-Imperfections (Routine & Conseils)","Cheveux longs (Routine)","Chignon base traie au milieu [Tuto Coiffure]","Cocooning de routine","Comment faire une perruque facile & rapide","Contouring rapide et pas cher","Easy Eye Liner pour les nuls","Éliminez correctement les faux ongles","Épiler ses sourcils","Halloween Sugar Skull - Tuto Maquillage","Hijab simple à réaliser (5 méthodes)","Je coupe et refais mes cheveux SEUL","Je me maquille UNIQUEMENT avec la trousse de ma sœur","Je me tatoue les lèvres (Test du Rouge)","Jolie compilation de maquillage pour les yeux","La meilleure astuce pour un eyeliner","Lápiz Labial Tutorial Compilación","Le meilleur maquillage cheveux bouclés","Le meilleur masque - DIY","Les formes d'ongles sur capsules faux ongles","Les meilleurs tutoriels de maquillage",
 ];
-
 const TITLES_26 = [
-  "Lisser cheveux avec un lisseur fer à l'",
-  "Lisser ses Cheveux sans Chaleur",
-  "Lisse toiles cheveux sans",
-  "Maquillage Melanin - Transformation",
-  "Maquillage nude pour peau foncée",
-  "Maquillage pour les yeux pailleté violet classique",
-  "Maquillage quotidien simple",
-  "Maquillage simple",
-  "Maquillage tutorial de Kylie Jenner",
-  "Maquiller ses sourcils",
-  "Masque détox (tous types de peau)",
-  "Masque noir anti points noirs",
-  "Meilleurs tutoriels de maquillage",
-  "Mettre des faux cils [7 méthodes]",
-  "Morning Routine Printemps",
-  "Orange Makeup (Dégradé pour les débutants)",
-  "Poser des faux cils pour les débutants",
-  "Routine Soins Corps - Printemps Été",
-  "Smokey eyes makeup (for beginner)",
-  "Solide anti-frisottis qui favorise la pousse - DIY Shampoing",
-  "Teint Unifié - Cacher ses imperfections",
-  "Test Bigoudis Magique (Boucles sans chaleur)",
-  "Tuto French Manucure simple (4 techniques)",
-  "Tuto maquillage pour débutant (NAKED)",
-  "Un bronzage parfait, naturel et lumineux",
-  "Vernis semi-permanent et appliquer pour l'enlever",
+  "Lisser cheveux avec un lisseur fer","Lisser ses Cheveux sans Chaleur","Lisse toiles cheveux sans","Maquillage Melanin - Transformation","Maquillage nude pour peau foncée","Maquillage pour les yeux pailleté violet","Maquillage quotidien simple","Maquillage simple","Maquillage tutorial de Kylie Jenner","Maquiller ses sourcils","Masque détox (tous types de peau)","Masque noir anti points noirs","Meilleurs tutoriels de maquillage","Mettre des faux cils [7 méthodes]","Morning Routine Printemps","Orange Makeup (Dégradé pour les débutants)","Poser des faux cils pour les débutants","Routine Soins Corps - Printemps Été","Smokey eyes makeup (for beginner)","Solide anti-frisottis - DIY Shampoing","Teint Unifié - Cacher ses imperfections","Test Bigoudis Magique (Boucles sans chaleur)","Tuto French Manucure simple (4 techniques)","Tuto maquillage pour débutant (NAKED)","Un bronzage parfait, naturel et lumineux","Vernis semi-permanent",
 ];
 
 const f24 = (n) => ({ id: `a${n}`, thumbnail: `${B1}/i${n}.jpg`, title: TITLES_24[n - 1], videoUrl: `${B1}/v${n}.mp4` });
 const f26 = (n) => ({ id: `b${n}`, thumbnail: `${B2}/i${n}.jpg`, title: TITLES_26[n - 1], videoUrl: `${B2}/v${n}.mp4` });
+
+const ACCENT = '#3b82f6';
+
+const VideoModal = ({ video, onClose }) => (
+  <AnimatePresence>
+    {video && (
+      <motion.div
+        className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+        style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(16px)' }}
+        initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <motion.button
+          className="absolute top-5 right-5 p-2.5 rounded-xl z-10"
+          style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)', color: '#fff' }}
+          whileHover={{ scale: 1.1 }} onClick={onClose}
+        >
+          <X className="w-5 h-5" />
+        </motion.button>
+        <motion.div
+          className="w-full max-w-5xl rounded-2xl overflow-hidden"
+          style={{ border: '1px solid rgba(255,255,255,0.08)', boxShadow: '0 40px 80px rgba(0,0,0,0.6)' }}
+          initial={{ scale: 0.85, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.85, opacity: 0 }}
+          transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+          onClick={e => e.stopPropagation()}
+        >
+          <video src={video.videoUrl} controls controlsList="nodownload" autoPlay className="w-full aspect-video" />
+          <div className="p-4" style={{ background: 'rgba(16,16,24,0.95)' }}>
+            <h3 className="font-semibold text-white">{video.title}</h3>
+          </div>
+        </motion.div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+);
+
+const Slider = ({ videos, slide, onPrev, onNext, onSetSlide, onSelect }) => (
+  <div className="relative">
+    <div className="overflow-hidden rounded-2xl">
+      <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${slide * (100 / 3)}%)` }}>
+        {videos.map((video) => (
+          <div key={video.id} className="min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-2">
+            <motion.div
+              className="relative group cursor-pointer rounded-xl overflow-hidden"
+              onClick={() => onSelect(video)}
+              whileHover={{ y: -4 }}
+            >
+              <img src={video.thumbnail} alt={video.title} className="w-full aspect-video object-cover" />
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-300 flex items-center justify-center">
+                <motion.div
+                  className="w-14 h-14 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                  style={{ background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT}cc)`, boxShadow: `0 8px 32px ${ACCENT}66` }}
+                  whileHover={{ scale: 1.1 }}
+                >
+                  <Play className="w-6 h-6 text-white fill-white ml-0.5" />
+                </motion.div>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-3"
+                style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)' }}>
+                <p className="text-white text-sm font-medium line-clamp-1">{video.title}</p>
+              </div>
+            </motion.div>
+          </div>
+        ))}
+      </div>
+    </div>
+    <button onClick={onPrev} className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full z-10 transition-all"
+      style={{ background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.15)', backdropFilter: 'blur(8px)' }}>
+      <ChevronLeft className="w-5 h-5 text-white" />
+    </button>
+    <button onClick={onNext} className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full z-10 transition-all"
+      style={{ background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(255,255,255,0.15)', backdropFilter: 'blur(8px)' }}>
+      <ChevronRight className="w-5 h-5 text-white" />
+    </button>
+    <div className="flex justify-center gap-2 mt-5">
+      {videos.map((_, idx) => (
+        <button key={idx} onClick={() => onSetSlide(idx)}
+          className="h-1.5 rounded-full transition-all duration-300"
+          style={{ width: slide === idx ? '24px' : '6px', background: slide === idx ? ACCENT : 'rgba(255,255,255,0.2)' }}
+        />
+      ))}
+    </div>
+  </div>
+);
 
 const TaekwondoPage = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -70,109 +107,95 @@ const TaekwondoPage = () => {
   const [hoverSlide, setHoverSlide] = useState(0);
 
   const topSliderVideos = Array.from({ length: 7 }, (_, i) => f24(i + 1));
-  const gridVideos = [
-    ...Array.from({ length: 17 }, (_, i) => f24(i + 8)),
-    ...Array.from({ length: 16 }, (_, i) => f26(i + 1)),
-  ];
+  const gridVideos = [...Array.from({ length: 17 }, (_, i) => f24(i + 8)), ...Array.from({ length: 16 }, (_, i) => f26(i + 1))];
   const hoverSliderVideos = Array.from({ length: 7 }, (_, i) => f26(i + 20));
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % topSliderVideos.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + topSliderVideos.length) % topSliderVideos.length);
-  const nextHoverSlide = () => setHoverSlide((prev) => (prev + 1) % hoverSliderVideos.length);
-  const prevHoverSlide = () => setHoverSlide((prev) => (prev - 1 + hoverSliderVideos.length) % hoverSliderVideos.length);
+  const nextSlide = () => setCurrentSlide(p => (p + 1) % topSliderVideos.length);
+  const prevSlide = () => setCurrentSlide(p => (p - 1 + topSliderVideos.length) % topSliderVideos.length);
+  const nextHover = () => setHoverSlide(p => (p + 1) % hoverSliderVideos.length);
+  const prevHover = () => setHoverSlide(p => (p - 1 + hoverSliderVideos.length) % hoverSliderVideos.length);
 
   return (
-    <div className="bg-white min-h-screen overflow-x-hidden pt-20 md:pt-24">
-      <div className="relative bg-black py-16 md:py-24" style={{ backgroundImage: 'url(https://api.ameora.fun/content/GalaxiWebsite/FASHION-24/i18.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div className="absolute inset-0 bg-black/30" />
+    <div className="min-h-screen overflow-x-hidden" style={{ background: 'var(--bg-primary)' }}>
+
+      {/* Hero Banner */}
+      <div className="relative py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center scale-105"
+          style={{ backgroundImage: `url(${B1}/i18.jpg)`, filter: 'blur(2px)' }} />
+        <div className="absolute inset-0" style={{
+          background: 'linear-gradient(135deg, rgba(10,10,15,0.92) 0%, rgba(10,10,15,0.7) 50%, rgba(10,10,15,0.85) 100%)'
+        }} />
+        <div className="absolute inset-0" style={{
+          background: `radial-gradient(ellipse at 30% 50%, ${ACCENT}18 0%, transparent 60%)`
+        }} />
         <div className="relative max-w-7xl mx-auto px-4 md:px-8">
-          <AnimatedTitle title="MODE – Vidéos en Vedette" className="text-white mb-8 font-zentry text-4xl md:text-6xl font-black text-center uppercase" />
-          <div className="relative">
-            <div className="overflow-hidden">
-              <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${currentSlide * (100 / 3)}%)` }}>
-                {topSliderVideos.map((video) => (
-                  <div key={video.id} className="min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-2">
-                    <div className="relative group cursor-pointer" onClick={() => setSelectedVideo(video)}>
-                      <img src={video.thumbnail} alt={video.title} className="rounded-lg w-full aspect-video object-cover" />
-                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 rounded-lg flex items-center justify-center transition-all">
-                        <Play className="w-16 h-16 text-white" fill="white" />
-                      </div>
-                      <p className="text-white text-center mt-2 font-semibold h-12 line-clamp-2">{video.title}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <button onClick={prevSlide} className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-2 rounded-full"><ChevronLeft className="w-6 h-6 text-white" /></button>
-            <button onClick={nextSlide} className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-2 rounded-full"><ChevronRight className="w-6 h-6 text-white" /></button>
-            <div className="flex justify-center gap-2 mt-6">
-              {topSliderVideos.map((_, idx) => (<button key={idx} onClick={() => setCurrentSlide(idx)} className={`w-2 h-2 rounded-full transition-all ${currentSlide === idx ? 'bg-white w-8' : 'bg-white/50'}`} />))}
-            </div>
-          </div>
+          <motion.div className="mb-3 flex items-center gap-2"
+            initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+            <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest"
+              style={{ background: `${ACCENT}22`, border: `1px solid ${ACCENT}44`, color: ACCENT }}>
+              Mode & Beauté
+            </span>
+          </motion.div>
+          <AnimatedTitle title="MODE – Vidéos en Vedette"
+            className="text-white font-zentry text-4xl md:text-6xl font-black uppercase mb-8" />
+          <Slider videos={topSliderVideos} slide={currentSlide}
+            onPrev={prevSlide} onNext={nextSlide} onSetSlide={setCurrentSlide} onSelect={setSelectedVideo} />
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 md:py-16">
-        <AnimatedTitle title="Meilleures Vidéos Mode" className="font-zentry text-4xl md:text-6xl font-black text-center uppercase" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-8">
-          {gridVideos.map((video) => (
-            <div key={video.id} className="relative group cursor-pointer transform hover:scale-105 transition-transform" onClick={() => setSelectedVideo(video)}>
-              <img src={video.thumbnail} alt={video.title} className="rounded-lg w-full aspect-video object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"><Play className="w-12 h-12 text-white" fill="white" /></div>
-              <p className="text-gray-800 font-semibold mt-2 h-12 line-clamp-2">{video.title}</p>
-            </div>
+      {/* Grid Section */}
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-16">
+        <div className="flex items-center gap-3 mb-8">
+          <div className="w-1 h-8 rounded-full" style={{ background: `linear-gradient(180deg, ${ACCENT}, ${ACCENT}66)` }} />
+          <AnimatedTitle title="Meilleures Vidéos Mode"
+            className="font-zentry text-3xl md:text-4xl font-black uppercase text-white" />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {gridVideos.map((video, i) => (
+            <motion.div key={video.id}
+              className="relative group cursor-pointer rounded-xl overflow-hidden"
+              style={{ background: 'rgba(22,22,31,0.8)', border: '1px solid rgba(255,255,255,0.06)' }}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: (i % 8) * 0.05 }} viewport={{ once: true }}
+              whileHover={{ y: -4, boxShadow: `0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px ${ACCENT}33` }}
+              onClick={() => setSelectedVideo(video)}
+            >
+              <img src={video.thumbnail} alt={video.title} className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/55 transition-all duration-300 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                  style={{ background: `linear-gradient(135deg, ${ACCENT}, ${ACCENT}cc)`, boxShadow: `0 8px 24px ${ACCENT}55` }}>
+                  <Play className="w-5 h-5 text-white fill-white ml-0.5" />
+                </div>
+              </div>
+              <div className="p-3">
+                <p className="text-sm font-medium line-clamp-2 leading-snug" style={{ color: 'rgba(255,255,255,0.8)' }}>
+                  {video.title}
+                </p>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
 
-      <div className="relative bg-black py-16 md:py-20" style={{ backgroundImage: 'url(https://api.ameora.fun/content/GalaxiWebsite/FASHION-26/i6.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div className="max-w-7xl mx-auto px-4 md:px-8 text-center">
-          <AnimatedTitle title="Regardez Plus de Superbes Vidéos Mode" className="text-white mb-6 font-zentry text-4xl md:text-6xl font-black text-center uppercase" />
-        </div>
-      </div>
-
-      <div className="relative bg-gray-900 py-16 md:py-24">
-        <div className="absolute inset-0 bg-black/30" />
+      {/* Second Slider */}
+      <div className="relative py-16 md:py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${B2}/i6.jpg)`, filter: 'blur(3px)', transform: 'scale(1.05)' }} />
+        <div className="absolute inset-0" style={{
+          background: 'linear-gradient(135deg, rgba(10,10,15,0.93) 0%, rgba(10,10,15,0.75) 100%)'
+        }} />
         <div className="relative max-w-7xl mx-auto px-4 md:px-8">
-          <AnimatedTitle title="Plus de Vidéos Mode" className="text-white mb-8 font-zentry text-4xl md:text-6xl font-black text-center uppercase" />
-          <div className="relative">
-            <div className="overflow-hidden">
-              <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${hoverSlide * (100 / 3)}%)` }}>
-                {hoverSliderVideos.map((video) => (
-                  <div key={video.id} className="min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-2">
-                    <div className="relative group cursor-pointer" onClick={() => setSelectedVideo(video)}>
-                      <img src={video.thumbnail} alt={video.title} className="rounded-lg w-full aspect-video object-cover" />
-                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 rounded-lg flex items-center justify-center transition-all"><Play className="w-16 h-16 text-white" fill="white" /></div>
-                      <p className="text-white text-center mt-2 font-semibold">{video.title}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <button onClick={prevHoverSlide} className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-2 rounded-full"><ChevronLeft className="w-6 h-6 text-white" /></button>
-            <button onClick={nextHoverSlide} className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-2 rounded-full"><ChevronRight className="w-6 h-6 text-white" /></button>
-            <div className="flex justify-center gap-2 mt-6">
-              {hoverSliderVideos.map((_, idx) => (<button key={idx} onClick={() => setHoverSlide(idx)} className={`w-2 h-2 rounded-full transition-all ${hoverSlide === idx ? 'bg-white w-8' : 'bg-white/50'}`} />))}
-            </div>
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-1 h-8 rounded-full" style={{ background: `linear-gradient(180deg, ${ACCENT}, ${ACCENT}66)` }} />
+            <AnimatedTitle title="Plus de Vidéos Mode"
+              className="text-white font-zentry text-3xl md:text-5xl font-black uppercase" />
           </div>
+          <Slider videos={hoverSliderVideos} slide={hoverSlide}
+            onPrev={prevHover} onNext={nextHover} onSetSlide={setHoverSlide} onSelect={setSelectedVideo} />
         </div>
       </div>
 
-      {selectedVideo && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4" onClick={() => setSelectedVideo(null)}>
-          <div className="relative max-w-4xl w-full bg-gray-900 rounded-lg overflow-hidden" onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setSelectedVideo(null)} className="absolute top-4 right-4 z-10 bg-white/20 hover:bg-white/40 backdrop-blur-sm p-2 rounded-full transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
-            {selectedVideo.videoUrl ? (
-              <video src={selectedVideo.videoUrl} controls controlsList="nodownload" autoPlay className="w-full aspect-video" />
-            ) : (
-              <img src={selectedVideo.thumbnail} alt={selectedVideo.title} className="w-full aspect-video object-cover" />
-            )}
-            <div className="p-4"><h3 className="text-xl font-bold text-white">{selectedVideo.title}</h3></div>
-          </div>
-        </div>
-      )}
+      <VideoModal video={selectedVideo} onClose={() => setSelectedVideo(null)} />
     </div>
   );
 };

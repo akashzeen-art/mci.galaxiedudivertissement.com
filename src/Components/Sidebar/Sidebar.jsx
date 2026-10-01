@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
-import { Menu, Zap, ListCollapse } from "lucide-react";
-import { motion } from 'framer-motion';
+import { ListCollapse } from "lucide-react";
+import { motion, AnimatePresence } from 'framer-motion';
 import { menuItems, libraryItems } from "../../data/sidebarData";
 import SidebarItem from "./SidebarItem";
-import SidebarTooltip from "./SidebarTooltip";
 
 const Sidebar = ({ isMinimized, onToggle, isMobile, setTooltip, activePage, setActivePage }) => {
   const showTooltip = (e, label) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    setTooltip({
-      visible: true,
-      label,
-      top: rect.top + rect.height / 2,
-    });
+    setTooltip({ visible: true, label, top: rect.top + rect.height / 2 });
   };
 
   const hideTooltip = () => {
@@ -20,72 +15,106 @@ const Sidebar = ({ isMinimized, onToggle, isMobile, setTooltip, activePage, setA
   };
 
   return (
-    <motion.div 
-      className={`${isMinimized && !isMobile ? 'w-20 p-3' : 'w-64 p-5'} bg-white/95 backdrop-blur-2xl h-screen fixed rounded-r-2xl left-0 top-0 flex flex-col z-50 overflow-y-auto overflow-x-hidden border-r border-gray-200 shadow-2xl transition-all duration-300`}
-      initial={{ x: -100 }}
-      animate={{ x: 0 }}
-      transition={{ duration: 0.5 }}
+    <motion.div
+      className={`${isMinimized && !isMobile ? 'w-20 px-3 py-5' : 'w-64 px-5 py-5'} 
+        fixed left-0 top-0 h-screen z-50 flex flex-col overflow-y-auto overflow-x-hidden
+        transition-all duration-300`}
+      style={{
+        background: 'linear-gradient(180deg, rgba(13,13,20,0.98) 0%, rgba(10,10,15,0.98) 100%)',
+        backdropFilter: 'blur(24px)',
+        borderRight: '1px solid rgba(255,255,255,0.06)',
+        boxShadow: '4px 0 24px rgba(0,0,0,0.4)',
+      }}
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
     >
-      
       {/* Logo */}
       <div className={`flex items-center ${isMinimized && !isMobile ? 'justify-center' : 'justify-between'} mb-8 shrink-0`}>
         {isMinimized && !isMobile ? (
-          <img src="/55(2).png" alt="GALAXIE" className="h-13 w-auto object-contain cursor-pointer" onClick={onToggle} />
+          <motion.img
+            src="/55(2).png"
+            alt="GALAXIE"
+            className="h-10 w-auto object-contain cursor-pointer opacity-90 hover:opacity-100 transition-opacity"
+            onClick={onToggle}
+            whileHover={{ scale: 1.05 }}
+          />
         ) : (
           <>
-            <img src="/55(2).png" alt="GALAXIE" className="h-12 w-auto object-contain" />
-            <button
+            <img src="/55(2).png" alt="GALAXIE" className="h-10 w-auto object-contain" />
+            <motion.button
               onClick={onToggle}
-              className="text-gray-600 hover:text-black transition-all duration-300 shrink-0 cursor-pointer self-center"
+              className="p-2 rounded-lg transition-all duration-200 cursor-pointer"
+              style={{ color: 'rgba(255,255,255,0.4)' }}
+              whileHover={{ scale: 1.1, color: '#fff' }}
+              whileTap={{ scale: 0.95 }}
             >
               <ListCollapse className="w-5 h-5 rotate-180" />
-            </button>
+            </motion.button>
           </>
         )}
       </div>
 
-      <nav className="overflow-y-auto overflow-x-hidden flex-1">
-        <div className="space-y-1">
-          {menuItems.map(item => (
-            <SidebarItem
-              key={item.label}
-              {...item}
-              active={activePage === item.label}
-              isMinimized={isMinimized}
-              isMobile={isMobile}
-              onHover={(e) => showTooltip(e, item.label)}
-              onLeave={hideTooltip}
-              onClick={() => setActivePage(item.label)}
-            />
-          ))}
-        </div>
+      {/* Nav label */}
+      {!isMinimized && (
+        <p className="text-xs font-semibold uppercase tracking-widest mb-3 px-3"
+          style={{ color: 'rgba(255,255,255,0.25)' }}>
+          Menu
+        </p>
+      )}
 
-        <div className="border-b border-gray-200 my-6"></div>
+      <nav className="overflow-y-auto overflow-x-hidden flex-1 space-y-1">
+        {menuItems.map(item => (
+          <SidebarItem
+            key={item.label}
+            {...item}
+            active={activePage === item.label}
+            isMinimized={isMinimized}
+            isMobile={isMobile}
+            onHover={(e) => showTooltip(e, item.label)}
+            onLeave={hideTooltip}
+            onClick={() => setActivePage(item.label)}
+          />
+        ))}
 
-        <div className="space-y-1">
-          {libraryItems.map(item => (
-            <SidebarItem
-              key={item.label}
-              {...item}
-              isMinimized={isMinimized}
-              isMobile={isMobile}
-              onHover={(e) => showTooltip(e, item.label)}
-              onLeave={hideTooltip}
-            />
-          ))}
-        </div>
+        {libraryItems.length > 0 && (
+          <>
+            <div className="my-4 mx-2" style={{ height: '1px', background: 'rgba(255,255,255,0.06)' }} />
+            {!isMinimized && (
+              <p className="text-xs font-semibold uppercase tracking-widest mb-3 px-3"
+                style={{ color: 'rgba(255,255,255,0.25)' }}>
+                Library
+              </p>
+            )}
+            {libraryItems.map(item => (
+              <SidebarItem
+                key={item.label}
+                {...item}
+                isMinimized={isMinimized}
+                isMobile={isMobile}
+                onHover={(e) => showTooltip(e, item.label)}
+                onLeave={hideTooltip}
+              />
+            ))}
+          </>
+        )}
       </nav>
 
-
-
+      {/* Bottom toggle */}
       {isMinimized && !isMobile && (
-        <button
+        <motion.button
           onClick={onToggle}
-          className="mt-4 w-full flex items-center justify-center py-3 text-gray-600 hover:text-black transition-colors cursor-pointer"
+          className="mt-4 w-full flex items-center justify-center py-3 rounded-lg transition-colors cursor-pointer"
+          style={{ color: 'rgba(255,255,255,0.3)' }}
+          whileHover={{ scale: 1.05 }}
         >
           <ListCollapse className="w-5 h-5" />
-        </button>
+        </motion.button>
       )}
+
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
+        style={{ background: 'linear-gradient(to top, rgba(10,10,15,0.8), transparent)' }} />
     </motion.div>
   );
 };

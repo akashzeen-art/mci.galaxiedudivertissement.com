@@ -1,30 +1,55 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { Mail } from 'lucide-react'
+import { motion } from 'framer-motion';
 
 const Footer = () => {
   return (
-    <footer className="bg-black border-t border-gray-800 mt-16">
-      <div className="px-4 md:px-8 py-12 max-w-7xl mx-auto">
+    <footer style={{ background: 'rgba(8,8,12,0.95)', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+      <div className="px-6 md:px-10 py-10 max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          className="flex flex-col md:flex-row items-center justify-between gap-6"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          {/* Bottom Bar */}
-          <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-800">
-            <div className="font-zentry text-xl font-bold text-white mb-4 md:mb-0">
-              GALAX<span className="text-violet-300">IE</span>
-            </div>
-            <p className="text-gray-500 text-sm font-circular-web">
-              © 2026 GALAXIE. Tous droits réservés.
-            </p>
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <img src="/55(2).png" alt="GALAXIE" className="h-9 w-auto object-contain opacity-80" />
+            <div className="h-6 w-px" style={{ background: 'rgba(255,255,255,0.1)' }} />
+            <span className="text-sm" style={{ color: 'rgba(255,255,255,0.3)' }}>
+              Plateforme de Streaming
+            </span>
           </div>
+
+          {/* Links */}
+          <div className="flex items-center gap-6">
+            {['Accueil', 'Catégories', 'À propos'].map(link => (
+              <button
+                key={link}
+                className="text-sm transition-colors duration-200 hover:text-white"
+                style={{ color: 'rgba(255,255,255,0.35)' }}
+              >
+                {link}
+              </button>
+            ))}
+          </div>
+
+          {/* Copyright */}
+          <p className="text-sm" style={{ color: 'rgba(255,255,255,0.25)' }}>
+            © 2026 GALAXIE. Tous droits réservés.
+          </p>
         </motion.div>
+
+        {/* Divider with gradient */}
+        <div className="mt-8 h-px" style={{
+          background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.3), rgba(236,72,153,0.2), transparent)'
+        }} />
+
+        <p className="text-center text-xs mt-6" style={{ color: 'rgba(255,255,255,0.15)' }}>
+          Fait avec ❤️ pour le meilleur divertissement
+        </p>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
