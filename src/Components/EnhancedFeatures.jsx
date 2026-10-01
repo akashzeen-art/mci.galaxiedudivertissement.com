@@ -250,13 +250,8 @@ const EnhancedFeatures = ({ onSelectCategory }) => {
                   {/* BG */}
                   <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-600 group-hover:scale-110"
-                    style={{ backgroundImage: `url(${typeof cat.bg === 'string' ? cat.bg : ''})`, backgroundImage: cat.bg && typeof cat.bg === 'string' ? `url(${cat.bg})` : `url(${cat.bg})` }}
+                    style={{ backgroundImage: cat.bgImg ? `url(${cat.bgImg})` : `url(${cat.bg})` }}
                   />
-                  {/* For local image */}
-                  {cat.bgImg && (
-                    <div className="absolute inset-0 bg-cover bg-center transition-transform duration-600 group-hover:scale-110"
-                      style={{ backgroundImage: `url(${cat.bgImg})` }} />
-                  )}
 
                   {/* Overlay */}
                   <div className="absolute inset-0"
