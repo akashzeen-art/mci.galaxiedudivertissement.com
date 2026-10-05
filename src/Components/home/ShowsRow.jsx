@@ -12,7 +12,7 @@ const ShowsRow = ({ shows, onPlay }) => (
           key={show.name}
           type="button"
           onClick={() => onPlay(firstEpisode)}
-          className="group snap-start shrink-0 relative w-[44%] sm:w-[30%] md:w-[23%] lg:w-[18.5%] xl:w-[15.6%] aspect-[3/4] rounded-2xl overflow-hidden text-left"
+          className="group snap-start shrink-0 relative w-[82%] sm:w-[48%] md:w-[38%] lg:w-[31.5%] aspect-video rounded-2xl overflow-hidden text-left"
           style={{ border: '1px solid rgba(255,255,255,0.08)' }}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -25,9 +25,9 @@ const ShowsRow = ({ shows, onPlay }) => (
             src={firstEpisode.thumbnail}
             alt=""
             loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <span className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/30 to-transparent" />
+          <span className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent" />
           <span
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             style={{ background: `radial-gradient(ellipse at 50% 100%, ${accent}40 0%, transparent 70%)` }}
@@ -38,8 +38,8 @@ const ShowsRow = ({ shows, onPlay }) => (
           >
             <Play className="w-4 h-4 text-white fill-white ml-0.5" />
           </span>
-          <span className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
-            <span className="block font-zentry text-sm sm:text-base xl:text-lg font-black uppercase text-white leading-tight mb-1">
+          <span className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
+            <span className="block font-zentry text-base sm:text-lg xl:text-xl font-black uppercase text-white leading-tight mb-1">
               {show.name}
             </span>
             <span className="block text-xs font-medium text-white/50">{show.episodes.length} épisodes</span>

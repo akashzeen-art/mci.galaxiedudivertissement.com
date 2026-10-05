@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Play, X, Eye, Clock, Sparkles } from 'lucide-react';
 import TiltCard from './TiltCard';
 import AnimatedTitle from './AnimatedTitle';
+import HorizontalScroller from './home/HorizontalScroller';
 
 const videos = [
   { id: 1, title: 'Le running', thumbnail: 'https://api.ameora.fun/content/GalaxiWebsite/COMEDY-50/i1.jpg', duration: '5:42', views: '2.1M', category: 'Comédie', videoUrl: 'https://api.ameora.fun/content/GalaxiWebsite/COMEDY-50/v1.mp4', accent: '#ec4899' },
@@ -53,7 +54,7 @@ const VideoSliderSection = () => {
             </motion.button>
           </div>
 
-          <div className="flex gap-5 overflow-x-auto snap-x scrollbar-hide pb-4">
+          <HorizontalScroller>
             {videos.map((video, index) => (
               <TiltCard key={video.id}>
                 <motion.div
@@ -132,7 +133,7 @@ const VideoSliderSection = () => {
                 </motion.div>
               </TiltCard>
             ))}
-          </div>
+          </HorizontalScroller>
         </div>
       </section>
 

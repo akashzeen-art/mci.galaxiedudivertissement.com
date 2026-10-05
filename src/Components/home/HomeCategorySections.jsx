@@ -19,7 +19,7 @@ const HomeSection = ({ accent, glowSide = 'left', children }) => (
     />
     <div
       className={`absolute -top-40 ${glowSide === 'left' ? '-left-40' : '-right-40'} w-[560px] h-[560px] rounded-full pointer-events-none`}
-      style={{ background: `radial-gradient(circle, ${accent}1f 0%, transparent 65%)`, filter: 'blur(40px)' }}
+      style={{ background: `radial-gradient(circle, ${accent}1f 0%, transparent 65%)` }}
     />
     <div className="relative max-w-7xl mx-auto">{children}</div>
   </section>

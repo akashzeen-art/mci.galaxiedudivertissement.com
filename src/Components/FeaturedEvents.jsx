@@ -5,6 +5,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import TiltCard from './TiltCard'
 import AnimatedTitle from './AnimatedTitle'
+import useHorizontalWheel from '../hooks/useHorizontalWheel'
 import wrestlingVideo from '../assets/stock-footage-wrestling-match-slow-motion-suplex-in-ring.webm'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -12,6 +13,7 @@ gsap.registerPlugin(ScrollTrigger)
 const FeaturedEvents = ({ events }) => {
   const scrollRef = useRef(null)
   const [hoveredEvent, setHoveredEvent] = useState(null)
+  useHorizontalWheel(scrollRef)
 
   const scroll = (direction) => {
     const container = scrollRef.current
@@ -57,7 +59,7 @@ const FeaturedEvents = ({ events }) => {
         
         <div 
           ref={scrollRef}
-          className="flex gap-4 md:gap-6 overflow-x-auto snap-x scrollbar-hide pb-4"
+          className="row-scroller flex gap-4 md:gap-6 overflow-x-auto overflow-y-hidden snap-x scrollbar-hide pt-3 pb-8 -mt-3 -mb-4"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {events.map((event, index) => (

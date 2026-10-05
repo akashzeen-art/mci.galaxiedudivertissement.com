@@ -93,7 +93,7 @@ const App = () => {
         {/* Page content */}
         <motion.main
           key={activePage}
-          className="pt-28 md:pt-16"
+          className="pt-28 md:pt-20"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -16 }}

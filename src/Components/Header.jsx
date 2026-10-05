@@ -21,7 +21,7 @@ const Header = ({ activePage, setActivePage, onMobileMenuClick, isMobileMenuOpen
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
-      <div className="max-w-[1600px] mx-auto px-4 md:px-6 h-16 flex items-center gap-4">
+      <div className="max-w-[1600px] mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center gap-4">
 
         {/* Logo */}
         <motion.div
@@ -30,7 +30,7 @@ const Header = ({ activePage, setActivePage, onMobileMenuClick, isMobileMenuOpen
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
         >
-          <img src="/55(2).png" alt="GALAXIE" className="h-9 w-auto object-contain"
+          <img src="/55(2).png" alt="GALAXIE" className="h-12 md:h-16 w-auto object-contain"
             style={{ filter: 'drop-shadow(0 0 12px rgba(124,58,237,0.4))' }} />
         </motion.div>
 

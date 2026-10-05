@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Play, Clock, Eye, ChevronLeft, ChevronRight } from 'lucide-react'
 import TiltCard from './TiltCard'
 import AnimatedTitle from './AnimatedTitle'
+import HorizontalScroller from './home/HorizontalScroller'
 
 const VideoSection = ({ videos }) => {
   const [activeCategory, setActiveCategory] = useState('highlights')
@@ -52,7 +53,7 @@ const VideoSection = ({ videos }) => {
           </div>
         </div>
         
-        <div className="flex gap-6 overflow-x-auto snap-x scrollbar-hide pb-4">
+        <HorizontalScroller>
           {filteredVideos.map((video, index) => (
             <TiltCard key={video.id}>
             <motion.div
@@ -102,7 +103,7 @@ const VideoSection = ({ videos }) => {
             </motion.div>
             </TiltCard>
           ))}
-        </div>
+        </HorizontalScroller>
       </motion.div>
     </section>
   )

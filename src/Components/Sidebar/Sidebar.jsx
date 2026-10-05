@@ -41,7 +41,7 @@ const Sidebar = ({ isMinimized, onToggle, isMobile, setTooltip, activePage, setA
           />
         ) : (
           <>
-            <img src="/55(2).png" alt="GALAXIE" className="h-10 w-auto object-contain" />
+            <img src="/55(2).png" alt="GALAXIE" className="h-14 w-auto object-contain" />
             <motion.button
               onClick={onToggle}
               className="p-2 rounded-lg transition-all duration-200 cursor-pointer"

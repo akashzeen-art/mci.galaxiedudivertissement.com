@@ -196,6 +196,21 @@ body {
   scroll-snap-align: center;
 }
 
+/* Horizontal rows: on mouse/trackpad they move via arrows and useHorizontalWheel instead of
+   native scrolling, so a vertical page scroll can never latch onto a row. Touch keeps native swipe. */
+.row-arrow {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .row-scroller {
+    overflow-x: hidden;
+    scroll-snap-type: none;
+  }
+  .row-arrow {
+    display: flex;
+  }
+}
+
 /* Shimmer loading */
 @keyframes shimmer {
   0% { background-position: -200% 0; }

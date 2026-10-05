@@ -73,7 +73,7 @@ const EnhancedFeatures = ({ onSelectCategory }) => {
   const [activeTab, setActiveTab] = useState(null);
 
   return (
-    <section id="categories" className="py-24 px-4 md:px-8 relative overflow-hidden scroll-mt-28 md:scroll-mt-16" style={{ background: 'var(--bg-primary)' }}>
+    <section id="categories" className="py-24 px-4 md:px-8 relative overflow-hidden scroll-mt-28 md:scroll-mt-20" style={{ background: 'var(--bg-primary)' }}>
 
       {/* Ambient blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

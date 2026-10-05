@@ -93,7 +93,7 @@ const EnhancedHeroSection = ({ isReady = true, onSelectCategory }) => {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full flex flex-col min-h-[calc(100svh-7rem)] md:min-h-[calc(100svh-4rem)] overflow-hidden"
+      className="relative w-full flex flex-col min-h-[calc(100svh-7rem)] md:min-h-[calc(100svh-5rem)] overflow-hidden"
       style={{ background: 'var(--bg-primary)' }}
     >
       {/* Backgrounds */}

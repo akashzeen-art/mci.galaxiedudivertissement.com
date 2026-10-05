@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import useHorizontalWheel from '../../hooks/useHorizontalWheel';
 
 const ArrowButton = ({ direction, visible, onClick }) => {
   const Icon = direction === 'left' ? ChevronLeft : ChevronRight;
@@ -9,8 +10,8 @@ const ArrowButton = ({ direction, visible, onClick }) => {
       onClick={onClick}
       aria-label={direction === 'left' ? 'Précédent' : 'Suivant'}
       tabIndex={visible ? 0 : -1}
-      className={`hidden md:flex absolute top-[38%] -translate-y-1/2 z-10 w-11 h-11 rounded-full items-center justify-center text-white transition-all duration-300 hover:scale-110 ${
-        direction === 'left' ? '-left-5' : '-right-5'
+      className={`row-arrow absolute top-[38%] -translate-y-1/2 z-10 w-11 h-11 rounded-full items-center justify-center text-white transition-all duration-300 hover:scale-110 ${
+        direction === 'left' ? 'left-0 md:-left-5' : 'right-0 md:-right-5'
       } ${visible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
       style={{
         background: 'rgba(10,10,15,0.85)',
@@ -28,6 +29,7 @@ const HorizontalScroller = ({ children }) => {
   const scrollerRef = useRef(null);
   const [canScrollBack, setCanScrollBack] = useState(false);
   const [canScrollForward, setCanScrollForward] = useState(false);
+  useHorizontalWheel(scrollerRef);
 
   const updateArrows = () => {
     const el = scrollerRef.current;
@@ -52,7 +54,7 @@ const HorizontalScroller = ({ children }) => {
       <div
         ref={scrollerRef}
         onScroll={updateArrows}
-        className="flex gap-4 md:gap-5 overflow-x-auto snap-x scrollbar-hide pb-3 pt-2 -mx-4 px-4 md:mx-0 md:px-0"
+        className="row-scroller flex gap-4 md:gap-5 overflow-x-auto overflow-y-hidden snap-x scrollbar-hide pt-4 pb-10 -mt-2 -mb-7 -mx-4 px-4 md:mx-0 md:px-0"
       >
         {children}
       </div>
