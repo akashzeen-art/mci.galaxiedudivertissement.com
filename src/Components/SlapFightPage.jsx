@@ -3,11 +3,7 @@ import { Play, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedTitle from './AnimatedTitle';
 
-const BASE = 'https://api.ameora.fun/content/GalaxiWebsite/COMEDY-50';
-const TITLES = [
-  "Le running - Ce que tu penses quand..","Quand ton gosse n'est pas rentable","Bande dessinée","Blague Miroir","Bureau des Plaintes, Harry Potter","Bureau des Plaintes - Spécial Halloween","COVID - Les masques","COVID - Premier BBQ","Effet Papillon","Emoji","Honnête - L'entretien d'embauche","Jean Michel Bruitage","Jeff Panacloc et Jean-Marc","L'enfance","L'homme moderne et les inventions","La vérité","Le rap de Gaspard et Balthazar","Le Bon L'Aveugle et le Racisme","Le Bon Prénom","Le don du Lang Urbain","Le Roi Lion - L'amour brille sous les étoiles","Les Candidats les Plus WTF","Le secret de la réussite à l'école","Les gens avec qui ne pas...","Les hommes","Les mémés s'éclatent","Les phrases à ne pas dire à ton ado","Les phrases honnêtes à Noël","Les Réponses de Ouf des Enfants","Le Surveillant du Bac","Ma chanteuse préférée","Massothérapeute","Princesse VS Princesse","Pub Ok Google","Quand ils font une connerie","Quand le coronavirus a ruiné ta vie","Quand on est Mario et Luigi","Quand on fait du camping","Quand t'as trop peur du coronavirus","Salle d'attente","Se remettre avec son ex","Serveur VS Client","Si Doctissimo était un vrai docteur","Si on traitait nos hommes comme des vêtements","Sketch Point de presse sur la COVID-19","Ski 1800","Top 10 des trucs qui n'arrivent qu'à la campagne","Top 20 des pires voisins pendant un spectacle","Vérification de Sécurité","Vieux Rap VS Nouveau Rap",
-];
-const v = (n) => ({ id: n, thumbnail: `${BASE}/i${n}.jpg`, title: TITLES[n - 1], videoUrl: `${BASE}/v${n}.mp4` });
+import { COMEDY_BASE as BASE, comedyVideo as v } from '../data/catalog';
 
 const ACCENT = '#ec4899';
 

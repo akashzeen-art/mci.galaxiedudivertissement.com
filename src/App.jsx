@@ -6,6 +6,7 @@ import Header from './Components/Header.jsx';
 import EnhancedHeroSection from './Components/EnhancedHeroSection.jsx';
 import EnhancedFeatures from './Components/EnhancedFeatures.jsx';
 import VideoSliderSection from './Components/VideoSliderSection.jsx';
+import HomeCategorySections from './Components/home/HomeCategorySections.jsx';
 import HeroSection from './Components/HeroSection.jsx';
 import FeaturedEvents from './Components/FeaturedEvents.jsx';
 import VideoSection from './Components/VideoSection.jsx';
@@ -29,9 +30,10 @@ const App = () => {
       case 'Accueil':
         return (
           <>
-            <EnhancedHeroSection />
+            <EnhancedHeroSection isReady={preloaderDone} onSelectCategory={setActivePage} />
             <EnhancedFeatures onSelectCategory={setActivePage} />
             <VideoSliderSection />
+            <HomeCategorySections onSelectCategory={setActivePage} />
           </>
         );
       case 'Dessin Animé':
@@ -67,48 +69,41 @@ const App = () => {
         )}
       </AnimatePresence>
 
-      {/* Main App */}
-      <AnimatePresence>
-        {preloaderDone && (
-          <motion.div
-            className="min-h-screen w-full overflow-x-hidden"
-            style={{ background: 'var(--bg-primary)' }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            {/* Header with nav */}
-            <Header
-              activePage={activePage}
-              setActivePage={setActivePage}
-              onMobileMenuClick={() => setIsMobileMenuOpen(p => !p)}
-              isMobileMenuOpen={isMobileMenuOpen}
-            />
+      {/* Main App — mounted under the preloader so media starts loading early */}
+      <div
+        className="min-h-screen w-full overflow-x-hidden"
+        style={{ background: 'var(--bg-primary)' }}
+      >
+        {/* Header with nav */}
+        <Header
+          activePage={activePage}
+          setActivePage={setActivePage}
+          onMobileMenuClick={() => setIsMobileMenuOpen(p => !p)}
+          isMobileMenuOpen={isMobileMenuOpen}
+        />
 
-            {/* Mobile Menu */}
-            <MobileMenu
-              isOpen={isMobileMenuOpen}
-              onClose={() => setIsMobileMenuOpen(false)}
-              activePage={activePage}
-              setActivePage={setActivePage}
-            />
+        {/* Mobile Menu */}
+        <MobileMenu
+          isOpen={isMobileMenuOpen}
+          onClose={() => setIsMobileMenuOpen(false)}
+          activePage={activePage}
+          setActivePage={setActivePage}
+        />
 
-            {/* Page content */}
-            <motion.main
-              key={activePage}
-              className="pt-16"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.3 }}
-            >
-              {renderPageContent()}
-            </motion.main>
+        {/* Page content */}
+        <motion.main
+          key={activePage}
+          className="pt-28 md:pt-16"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -16 }}
+          transition={{ duration: 0.3 }}
+        >
+          {renderPageContent()}
+        </motion.main>
 
-            <Footer />
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <Footer />
+      </div>
     </>
   );
 };

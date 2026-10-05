@@ -3,11 +3,7 @@ import { Play, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedTitle from './AnimatedTitle';
 
-const BASE = 'https://api.ameora.fun/content/GalaxiWebsite/COOKING';
-const TITLES = [
-  "Basque aux œufs","Biscuit roulé au chocolat","Boulettes de viande de porc","Burger au barbecue","Burger de boeuf et fraises","Carbonnade flamande","Cotoletta milanaise","Côte de boeuf","Curry de la Réunion","Curry de poulet aux champignons","Dinde farcie","Double burger","Homard grillé","Kumpir turque","Lamb Kebab","Lasagna Bolognese","Mafé au poulet","Mafé cuisine","Maison Saumon","Moroccan Tagine","Nouilles au boeuf","Nouilles de poulet","Pâtes & champignons","Pâtisserie à la viande hachée","Pizza végétarienne","Plat d'aubergine","Plat de Valence","Poisson au curry rouge","Pommes de terre au lait","Poulet BBQ portugais","Quiche de thon","Ragoût de porc","Recette du Ramadan Tunisien","Recette japonaise","Sandwich au banh mi","Sea Spaghetti","Tacos au poulet","Tartelettes au thon","Tartiflette","Tomates farcies","Truffade Cuisine",
-];
-const v = (n) => ({ id: n, thumbnail: `${BASE}/i${n}.jpg`, title: TITLES[n - 1], videoUrl: `${BASE}/v${n}.mp4` });
+import { COOKING_BASE as BASE, cookingVideo as v } from '../data/catalog';
 
 const ACCENT = '#f59e0b';
 

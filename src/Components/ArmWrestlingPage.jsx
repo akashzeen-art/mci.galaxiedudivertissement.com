@@ -3,66 +3,13 @@ import { Play, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedTitle from './AnimatedTitle';
 
-const BASE = 'https://api.ameora.fun/content/GalaxiWebsite/CARTOONS-32';
-const VAS = 'https://api.ameora.fun/content/vas_cartoon';
+import {
+  CARTOON_BASE as BASE, VAS_CARTOON_BASE as VAS,
+  dragonBallZ, heyArnold, inspectorGadget, pokemon, smurfs, tomAndJerry,
+  cartoons11, cartoons16, cartoons5,
+} from '../data/catalog';
+
 const ACCENT = '#7c3aed';
-
-const dragonBallZ = [
-  { id: 'd1', title: 'Dragon Ball Z – Méga Compilation Saga Boo', thumbnail: `${VAS}/thumnbnail/DRAGONBALLZ/1.png`, videoUrl: `${VAS}/video/dragonballZ/DragonBallZ-MégaCompilation-RésuméCompletSagaBoo.mp4` },
-  { id: 'd2', title: 'Méga Compilation – Résumé Comp', thumbnail: `${VAS}/thumnbnail/DRAGONBALLZ/2.png`, videoUrl: `${VAS}/video/dragonballZ/MégaCompilation-RésuméComp.mp4` },
-  { id: 'd3', title: 'Méga Compilation – Résumé Complet', thumbnail: `${VAS}/thumnbnail/DRAGONBALLZ/3.png`, videoUrl: `${VAS}/video/dragonballZ/MégaCompilation-RésuméComplet.mp4` },
-  { id: 'd4', title: 'Méga Compilation – Résumé Complet Saga', thumbnail: `${VAS}/thumnbnail/DRAGONBALLZ/4.png`, videoUrl: `${VAS}/video/dragonballZ/MégaCompilation-RésuméCompletSaga.mp4` },
-  { id: 'd5', title: 'Résumé Complet Saga Babidi', thumbnail: `${VAS}/thumnbnail/DRAGONBALLZ/5.png`, videoUrl: `${VAS}/video/dragonballZ/RésuméCompletSagaBabidi.mp4` },
-];
-const heyArnold = [
-  { id: 'h1', title: 'Hé Arnold – Canicule !', thumbnail: `${VAS}/thumnbnail/HEYARNOLD/1.png`, videoUrl: `${VAS}/video/HEYARNOLD/HéArnold_Canicule!.mp4` },
-  { id: 'h2', title: 'Hé Arnold – La soirée de filles', thumbnail: `${VAS}/thumnbnail/HEYARNOLD/2.png`, videoUrl: `${VAS}/video/HEYARNOLD/HéArnold_Lasoiréedefilles.mp4` },
-  { id: 'h3', title: 'Hé Arnold – Le samedi parfait', thumbnail: `${VAS}/thumnbnail/HEYARNOLD/3.png`, videoUrl: `${VAS}/video/HEYARNOLD/HéArnold_Lesamediparfait.mp4` },
-  { id: 'h4', title: 'Hé Arnold – Le petit carnet rose', thumbnail: `${VAS}/thumnbnail/HEYARNOLD/4.png`, videoUrl: `${VAS}/video/HEYARNOLD/HéArnoldLepetitcarnetrose.mp4` },
-  { id: 'h5', title: 'Hé Arnold – Monsieur Smith', thumbnail: `${VAS}/thumnbnail/HEYARNOLD/5.png`, videoUrl: `${VAS}/video/HEYARNOLD/HéArnoldMonsieurSmith.mp4` },
-];
-const inspectorGadget = [
-  { id: 'g1', title: 'Conférence de presse de Gadget', thumbnail: `${VAS}/thumnbnail/INSPECTORGADGET/1.png`, videoUrl: `${VAS}/video/inspectorgadget/ConférencedepressedeGadget.mp4` },
-  { id: 'g2', title: 'Gadget et le Lama', thumbnail: `${VAS}/thumnbnail/INSPECTORGADGET/2.png`, videoUrl: `${VAS}/video/inspectorgadget/GadgetetleLama.mp4` },
-  { id: 'g3', title: 'Gadget et le Nain', thumbnail: `${VAS}/thumnbnail/INSPECTORGADGET/3.png`, videoUrl: `${VAS}/video/inspectorgadget/GadgetetleNain.mp4` },
-  { id: 'g4', title: 'Gadget le somnambule', thumbnail: `${VAS}/thumnbnail/INSPECTORGADGET/4.png`, videoUrl: `${VAS}/video/inspectorgadget/Gadgetlesomnambule.mp4` },
-  { id: 'g5', title: 'Gadget magique', thumbnail: `${VAS}/thumnbnail/INSPECTORGADGET/5.png`, videoUrl: `${VAS}/video/inspectorgadget/Gadgetmagique.mp4` },
-];
-const pokemon = [
-  { id: 'p1', title: 'Le Maître Pokémon Évolutions – Épisode 1', thumbnail: `${VAS}/thumnbnail/POKEMON/1.png`, videoUrl: `${VAS}/video/POKEMON/LeMaîtrePokémonÉvolutions_Épisode1.mp4` },
-  { id: 'p2', title: 'Pokémon Évolutions – Bande-annonce 2', thumbnail: `${VAS}/thumnbnail/POKEMON/2.png`, videoUrl: `${VAS}/video/POKEMON/PokémonÉvolutions_Bande-annonce2.mp4` },
-  { id: 'p3', title: "L'éclipse – Pokémon Évolutions – Épisode 2", thumbnail: `${VAS}/thumnbnail/POKEMON/3.png`, videoUrl: `${VAS}/video/POKEMON/L'éclipse_PokémonÉvolutions–Épisode2.mp4` },
-  { id: 'p4', title: 'Le visionnaire – Pokémon Évolutions – Épisode 3', thumbnail: `${VAS}/thumnbnail/POKEMON/4.png`, videoUrl: `${VAS}/video/POKEMON/Levisionnaire_PokémonÉvolutions_Épisode3.mp4` },
-  { id: 'p5', title: 'Le plan – Pokémon Évolutions – Épisode 4', thumbnail: `${VAS}/thumnbnail/POKEMON/5.png`, videoUrl: `${VAS}/video/POKEMON/Leplan_PokémonÉvolutions_Épisode4.mp4` },
-];
-const smurfs = [
-  { id: 's1', title: 'Le Pouvoir du Sourire ! Les Schtroumpfs', thumbnail: `${VAS}/thumnbnail/THESMURFS/1.png`, videoUrl: `${VAS}/video/thesmurfs/ePouvoirduSourire!LesSchtroumpfs.mp4` },
-  { id: 's2', title: 'Le Problème du Schtroumpf Paresseux !', thumbnail: `${VAS}/thumnbnail/THESMURFS/2.png`, videoUrl: `${VAS}/video/thesmurfs/LeProblèmeduSchtroumpfParesseux!.mp4` },
-  { id: 's3', title: 'Le Retour des Schtroumpfs ! – Clip Exclusif', thumbnail: `${VAS}/thumnbnail/THESMURFS/3.png`, videoUrl: `${VAS}/video/thesmurfs/LeRetourdesSchtroumpfs!_CLIPEXCLUSIF!.mp4` },
-  { id: 's4', title: 'Les deux bêtas font la paire – Les Schtroumpfs 3D', thumbnail: `${VAS}/thumnbnail/THESMURFS/4.png`, videoUrl: `${VAS}/video/thesmurfs/LesdeuxbêtasfontlapaireLesSchtroumpfs3D.mp4` },
-  { id: 's5', title: 'Qui a cassé le télescope du Grand Schtroumpf ?', thumbnail: `${VAS}/thumnbnail/THESMURFS/5.png`, videoUrl: `${VAS}/video/thesmurfs/QuiacasséletélescopeduGrandSchtroumpf-LesSchtroumpfs.mp4` },
-  { id: 's6', title: 'Un Anniversaire EXPLOSIF !', thumbnail: `${VAS}/thumnbnail/THESMURFS/6..png`, videoUrl: `${VAS}/video/thesmurfs/UnAnniversaireEXPLOSIF!.mp4` },
-];
-const tomAndJerry = [
-  { id: 't1', title: 'Folie martienne', thumbnail: `${VAS}/thumnbnail/TOMANDJERRY/1.png`, videoUrl: `${VAS}/video/tomandjerryfr/Foliemartienne.mp4` },
-  { id: 't2', title: 'Le chat & la souris détectives', thumbnail: `${VAS}/thumnbnail/TOMANDJERRY/2.png`, videoUrl: `${VAS}/video/tomandjerryfr/Lechat&lasourisdétectives.mp4` },
-  { id: 't3', title: 'Les GRANDES aventures fantasy de Tom et Jerry', thumbnail: `${VAS}/thumnbnail/TOMANDJERRY/3.png`, videoUrl: `${VAS}/video/tomandjerryfr/LesGRANDESaventuresfantasydeTometJerry.mp4` },
-  { id: 't4', title: 'Tom & Jerry deviennent des RATS DE BIBLIOTHÈQUE', thumbnail: `${VAS}/thumnbnail/TOMANDJERRY/4.png`, videoUrl: `${VAS}/video/tomandjerryfr/Tom&JerrydeviennentdesRATSDEBIBLIOTHÈQUE.mp4` },
-  { id: 't5', title: 'Un Jerry IMMENSE vs un Tom MINUSCULE', thumbnail: `${VAS}/thumnbnail/TOMANDJERRY/5.png`, videoUrl: `${VAS}/video/tomandjerryfr/UnJerryIMMENSEvsunTomMINUSCULE.mp4` },
-];
-
-const cartoons11 = Array.from({ length: 11 }, (_, i) => ({
-  id: i + 1, thumbnail: `${BASE}/CARTOONS-11/i${i + 1}.jpg`, videoUrl: `${BASE}/CARTOONS-11/v${i + 1}.mp4`,
-  title: ['Silicon Valley Girls','A Thing For Musicians','Mandy Book','Baddies On A Blimp','Danger TV','Une Vie De Chat','Jeux Vidéo Zéro','Super Méga Danse Show','Mariage Et Sabotages','Les Délices De Grand-Mère','Célébrité Volée'][i],
-}));
-const cartoons16 = Array.from({ length: 16 }, (_, i) => ({
-  id: i + 12, thumbnail: `${BASE}/CARTOONS-16/i${i + 1}.jpg`, videoUrl: `${BASE}/CARTOONS-16/v${i + 1}.mp4`,
-  title: ['Chap Kollé','Dansez Petits Rats','Deux Mirette','Faux Pas Sur La Place Rouge','Jean Patonaute','La Griffe Du Caire','La Trahison Du Bortsch','Le Monstre De La Tamise',"L'Invasion Des Potiches Tournantes",'Le Sphinx Se Démonte','Paris Photo Express',"Pour L'Amour Du Sphinx",'Rap À Plondres','Rome Mise À Neuf','Taxi Iii Yi Iii Ha','Un Gorille À New York'][i],
-}));
-const cartoons5 = Array.from({ length: 5 }, (_, i) => ({
-  id: i + 28, thumbnail: `${BASE}/CARTOONS-5/i${i + 1}.jpg`, videoUrl: `${BASE}/CARTOONS-5/v${i + 1}.mp4`,
-  title: ['La Chute','La Loi De La Jungle','Miss À Tous Les Prix','Such Is Taken','Les Espionnes De La Silicon Valley'][i],
-}));
 
 const VideoModal = ({ video, onClose }) => (
   <AnimatePresence>

@@ -3,18 +3,10 @@ import { Play, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AnimatedTitle from './AnimatedTitle';
 
-const B1 = 'https://api.ameora.fun/content/GalaxiWebsite/FASHION-24';
-const B2 = 'https://api.ameora.fun/content/GalaxiWebsite/FASHION-26';
-
-const TITLES_24 = [
-  "10 idées de coiffures plaquées sur un carré mi-long lisse","4 Tuto Turban Facile À Faire","Acne Routine","Anti-Imperfections (Routine & Conseils)","Cheveux longs (Routine)","Chignon base traie au milieu [Tuto Coiffure]","Cocooning de routine","Comment faire une perruque facile & rapide","Contouring rapide et pas cher","Easy Eye Liner pour les nuls","Éliminez correctement les faux ongles","Épiler ses sourcils","Halloween Sugar Skull - Tuto Maquillage","Hijab simple à réaliser (5 méthodes)","Je coupe et refais mes cheveux SEUL","Je me maquille UNIQUEMENT avec la trousse de ma sœur","Je me tatoue les lèvres (Test du Rouge)","Jolie compilation de maquillage pour les yeux","La meilleure astuce pour un eyeliner","Lápiz Labial Tutorial Compilación","Le meilleur maquillage cheveux bouclés","Le meilleur masque - DIY","Les formes d'ongles sur capsules faux ongles","Les meilleurs tutoriels de maquillage",
-];
-const TITLES_26 = [
-  "Lisser cheveux avec un lisseur fer","Lisser ses Cheveux sans Chaleur","Lisse toiles cheveux sans","Maquillage Melanin - Transformation","Maquillage nude pour peau foncée","Maquillage pour les yeux pailleté violet","Maquillage quotidien simple","Maquillage simple","Maquillage tutorial de Kylie Jenner","Maquiller ses sourcils","Masque détox (tous types de peau)","Masque noir anti points noirs","Meilleurs tutoriels de maquillage","Mettre des faux cils [7 méthodes]","Morning Routine Printemps","Orange Makeup (Dégradé pour les débutants)","Poser des faux cils pour les débutants","Routine Soins Corps - Printemps Été","Smokey eyes makeup (for beginner)","Solide anti-frisottis - DIY Shampoing","Teint Unifié - Cacher ses imperfections","Test Bigoudis Magique (Boucles sans chaleur)","Tuto French Manucure simple (4 techniques)","Tuto maquillage pour débutant (NAKED)","Un bronzage parfait, naturel et lumineux","Vernis semi-permanent",
-];
-
-const f24 = (n) => ({ id: `a${n}`, thumbnail: `${B1}/i${n}.jpg`, title: TITLES_24[n - 1], videoUrl: `${B1}/v${n}.mp4` });
-const f26 = (n) => ({ id: `b${n}`, thumbnail: `${B2}/i${n}.jpg`, title: TITLES_26[n - 1], videoUrl: `${B2}/v${n}.mp4` });
+import {
+  FASHION_24_BASE as B1, FASHION_26_BASE as B2,
+  fashion24Video as f24, fashion26Video as f26,
+} from '../data/catalog';
 
 const ACCENT = '#3b82f6';
 

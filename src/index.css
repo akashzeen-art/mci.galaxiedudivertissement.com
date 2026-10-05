@@ -227,6 +227,12 @@ body {
   animation: livePulse 1.5s ease-in-out infinite;
 }
 
+/* Hero slide progress */
+@keyframes heroProgress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 /* Noise texture overlay */
 .noise::after {
   content: '';
