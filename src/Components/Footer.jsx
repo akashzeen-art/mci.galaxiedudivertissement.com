@@ -20,19 +20,6 @@ const Footer = () => {
             </span>
           </div>
 
-          {/* Links */}
-          <div className="flex items-center gap-6">
-            {['Accueil', 'Catégories', 'À propos'].map(link => (
-              <button
-                key={link}
-                className="text-sm transition-colors duration-200 hover:text-white"
-                style={{ color: 'rgba(255,255,255,0.35)' }}
-              >
-                {link}
-              </button>
-            ))}
-          </div>
-
           {/* Copyright */}
           <p className="text-sm" style={{ color: 'rgba(255,255,255,0.25)' }}>
             © 2026 GALAXIE. Tous droits réservés.
