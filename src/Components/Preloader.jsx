@@ -153,8 +153,8 @@ const Preloader = ({ onComplete }) => {
           </svg>
 
           <img
-            src="/55(2).png"
-            alt="GALAXIE"
+            src="/Galaxie Videos Logo.png"
+            alt="Galaxie Videos"
             className="relative w-24 h-auto object-contain"
             style={{ filter: 'drop-shadow(0 0 24px rgba(124,58,237,0.55))' }}
           />
@@ -180,7 +180,7 @@ const Preloader = ({ onComplete }) => {
               transition={{ duration: 0.25 }}
               style={{ color: isDone ? '#c084fc' : 'rgba(255,255,255,0.55)' }}
             >
-              {isDone ? 'Bienvenue sur Galaxie' : `Chargement · ${categories[activeIndex].label}`}
+              {isDone ? 'Bienvenue sur Galaxie Videos' : `Chargement · ${categories[activeIndex].label}`}
             </motion.p>
           </AnimatePresence>
         </div>

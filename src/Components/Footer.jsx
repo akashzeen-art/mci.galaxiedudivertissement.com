@@ -13,7 +13,7 @@ const Footer = () => {
         >
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <img src="/55(2).png" alt="GALAXIE" className="h-14 md:h-16 w-auto object-contain" />
+            <img src="/Galaxie Videos Logo.png" alt="Galaxie Videos" className="h-14 md:h-16 w-auto object-contain" />
             <div className="h-6 w-px" style={{ background: 'rgba(255,255,255,0.1)' }} />
             <span className="text-sm" style={{ color: 'rgba(255,255,255,0.3)' }}>
               Plateforme de Streaming
@@ -22,7 +22,7 @@ const Footer = () => {
 
           {/* Copyright */}
           <p className="text-sm" style={{ color: 'rgba(255,255,255,0.25)' }}>
-            © 2026 GALAXIE. Tous droits réservés.
+            © 2026 Galaxie Videos. Tous droits réservés.
           </p>
         </motion.div>
 

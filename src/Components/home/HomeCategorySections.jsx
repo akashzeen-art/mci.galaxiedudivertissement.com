@@ -44,7 +44,7 @@ const HomeCategorySections = ({ onSelectCategory }) => {
           icon={Flame}
           eyebrow="Tendances"
           title="Top 10 de la semaine"
-          subtitle="Les vidéos les plus regardées sur Galaxie, toutes catégories confondues."
+          subtitle="Les vidéos les plus regardées sur Galaxie Videos, toutes catégories confondues."
           accent="#ec4899"
           accentLight="#f472b6"
         />

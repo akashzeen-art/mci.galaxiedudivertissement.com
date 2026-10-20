@@ -30,7 +30,7 @@ const Header = ({ activePage, setActivePage, onMobileMenuClick, isMobileMenuOpen
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
         >
-          <img src="/55(2).png" alt="GALAXIE" className="h-12 md:h-16 w-auto object-contain"
+          <img src="/Galaxie Videos Logo.png" alt="Galaxie Videos" className="h-12 md:h-16 w-auto object-contain"
             style={{ filter: 'drop-shadow(0 0 12px rgba(124,58,237,0.4))' }} />
         </motion.div>
 

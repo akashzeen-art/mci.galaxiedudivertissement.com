@@ -39,7 +39,7 @@ const MobileMenu = ({ isOpen, onClose, activePage, setActivePage }) => {
             {/* Header */}
             <div className="flex items-center justify-between p-5 shrink-0"
               style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <img src="/55(2).png" alt="GALAXIE" className="h-9 w-auto object-contain" />
+              <img src="/Galaxie Videos Logo.png" alt="Galaxie Videos" className="h-9 w-auto object-contain" />
               <motion.button
                 onClick={onClose}
                 className="p-2 rounded-xl"

@@ -33,15 +33,15 @@ const Sidebar = ({ isMinimized, onToggle, isMobile, setTooltip, activePage, setA
       <div className={`flex items-center ${isMinimized && !isMobile ? 'justify-center' : 'justify-between'} mb-8 shrink-0`}>
         {isMinimized && !isMobile ? (
           <motion.img
-            src="/55(2).png"
-            alt="GALAXIE"
+            src="/Galaxie Videos Logo.png"
+            alt="Galaxie Videos"
             className="h-10 w-auto object-contain cursor-pointer opacity-90 hover:opacity-100 transition-opacity"
             onClick={onToggle}
             whileHover={{ scale: 1.05 }}
           />
         ) : (
           <>
-            <img src="/55(2).png" alt="GALAXIE" className="h-14 w-auto object-contain" />
+            <img src="/Galaxie Videos Logo.png" alt="Galaxie Videos" className="h-14 w-auto object-contain" />
             <motion.button
               onClick={onToggle}
               className="p-2 rounded-lg transition-all duration-200 cursor-pointer"
