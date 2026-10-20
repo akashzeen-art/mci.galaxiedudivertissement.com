@@ -1,4 +1,4 @@
-import { Search, Bell, Menu, X } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { menuItems } from '../data/sidebarData';
@@ -113,31 +113,6 @@ const Header = ({ activePage, setActivePage, onMobileMenuClick, isMobileMenuOpen
               </motion.button>
             )}
           </AnimatePresence>
-
-          {/* Bell */}
-          <motion.button
-            className="relative p-2.5 rounded-xl"
-            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.5)' }}
-            whileHover={{ scale: 1.05, color: '#fff', background: 'rgba(255,255,255,0.08)' }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Bell className="w-4 h-4" />
-            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full"
-              style={{ background: '#a855f7', boxShadow: '0 0 6px rgba(168,85,247,0.9)' }} />
-          </motion.button>
-
-          {/* Avatar */}
-          <motion.div
-            className="w-9 h-9 rounded-xl flex items-center justify-center text-sm font-bold text-white cursor-pointer shrink-0"
-            style={{
-              background: 'linear-gradient(135deg, #7c3aed, #a855f7)',
-              boxShadow: '0 4px 14px rgba(124,58,237,0.45)',
-            }}
-            whileHover={{ scale: 1.06 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            G
-          </motion.div>
 
           {/* Mobile hamburger */}
           <motion.button
